@@ -8,8 +8,25 @@ The strategy targets the immediate market open volatility (NY Session at 9:30 AM
 
 - **Instrument:** NQ
 - **Risk:** 1% per trade
-- **Take Profit / Stop Loss:** Fixed 50-point target / 50-point stop.
+
+### Strategy Setup & Rules
+
+1. **Trading Windows:** 
+   - **NY Session:** 09:30 AM – 10:10 AM EST
+   - **London Session (Variant B):** 03:00 AM – 04:00 AM EST
+2. **The Setup (Impulse & Retracement):**
+   - The engine monitors the market open to establish an initial impulse wave. It tracks the extreme high and extreme low from the session open to define a Fibonacci range (0 to 1).
+   - We wait for price to retrace into the "Golden Pocket"—specifically between the **23.6% and 40.0%** Fibonacci retracement levels.
+3. **Execution Logic:**
+   - **Market Entry:** If price enters the 23.6% - 40% zone, execute a market order in the direction of the initial impulse.
+   - **Limit Entry:** If price moves too fast and violently breaks past the 40% level before an entry can trigger, a limit order is dynamically placed at the **33.0%** retracement level to catch the wick.
+4. **Trade Management:**
+   - **Stop Loss:** Hard stop placed exactly at the 0% Fibonacci level (the absolute extreme of the impulse wave).
+   - **Take Profit:** Fixed 50 points from the entry price.
+   - **Frequency:** Maximum of one trade per session window.
+
 - **Account Mechanics:** The system leverages Prop Firm evaluation mechanics. Accounts are automatically discarded upon hitting a static drawdown limit, allowing the strategy to hedge against long consecutive losing streaks while maximizing outsized win streaks.
+
 
 ## Prop Firm Payout Mechanics (The "2% Rinse")
 
